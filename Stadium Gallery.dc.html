@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+  html,body{height:100%;margin:0}
+  *{box-sizing:border-box}
+  *:focus-visible{outline:2px solid var(--acc,#1d4ed8);outline-offset:2px;border-radius:3px}
+  .sg-scroll::-webkit-scrollbar{width:9px}
+  .sg-scroll::-webkit-scrollbar-thumb{background:#c9ccd3;border-radius:5px;border:2px solid #fbfbfc}
+  .sg-scroll::-webkit-scrollbar-thumb:hover{background:#aeb2bb}
+</style>
+</helmet>
+<div style="--acc:{{ accent }};display:flex;align-items:stretch;min-height:460px;background:#ffffff;color:#16181d;font-family:'Inter',system-ui,-apple-system,sans-serif;overflow:hidden">
+
+  <aside aria-label="World Cup 2026 host stadiums" style="width:314px;flex:none;display:flex;flex-direction:column;background:#fbfbfc;border-right:1px solid #e7e9ee">
+    <div style="padding:24px 24px 16px;border-bottom:1px solid #ecedf1">
+      <div style="font:600 12px/1 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }}">FIFA World Cup 26</div>
+      <h2 style="margin:9px 0 3px;font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:25px;line-height:1.08;color:#16181d">Host Stadiums</h2>
+      <div style="font:400 13px/1.3 'Inter',sans-serif;color:#6b7280">16 venues · 3 nations</div>
+    </div>
+    <nav aria-label="Stadium list" class="sg-scroll" style="flex:1 1 0;min-height:0;overflow-y:auto;padding:10px 10px 22px">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ items }}" as="item" hint-placeholder-count="16">
+          <li>
+            <button type="button" onClick="{{ item.onClick }}" aria-current="{{ item.current }}" style="{{ item.btn }}" style-hover="{{ item.btnHover }}">
+              <span style="display:flex;flex-direction:column;flex:1;min-width:0;overflow:hidden">
+                <span style="{{ item.name }}">{{ item.stadium }}</span>
+                <span style="display:block;font:400 12px/1.35 'Inter',sans-serif;color:#676d78;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.city }}</span>
+              </span>
+              <span style="flex:none;font:600 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#676d78;padding:4px 7px;border:1px solid #e2e4e9;border-radius:6px">{{ item.cc }}</span>
+            </button>
+          </li>
+        </sc-for>
+      </ul>
+    </nav>
+  </aside>
+
+  <main aria-live="polite" style="flex:1;min-width:0;overflow:visible;background:#ffffff">
+    <section aria-roledescription="carousel" aria-label="Photos of {{ cur.stadium }}" style="padding:22px 34px 2px">
+      <div style="position:relative;width:100%;height:min(34vh,300px);min-height:210px;border-radius:16px;overflow:hidden;background:repeating-linear-gradient(135deg,#eef0f4 0 15px,#e6e8ee 15px 30px);border:1px solid #e4e6eb">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px">
+          <div style="width:52px;height:52px;border:2px dashed #a9adb7;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#8f95a0;font:600 12px/1 ui-monospace,Menlo,monospace">IMG</div>
+          <div style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;color:#3f4552">{{ curImg }}</div>
+          <div style="font:500 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;color:#8f95a0">DROP PHOTO — 16 : 9</div>
+        <div style="position: absolute; left: 464px; max-width: 70%; padding: 7px 13px; border-radius: 20px; background: rgba(255,255,255,.94); color: #16181d; font: 600 12px/1.2 'Inter',sans-serif; box-shadow: 0 1px 4px rgba(0,0,0,.12); top: 277px">{{ curImg }}</div></div>
+        
+        
+        <div style="position:absolute;right:12px;bottom:12px;padding:3px 8px;border-radius:5px;background:rgba(22,24,29,.55);color:rgba(255,255,255,.92);font:500 12px/1.3 'Inter',sans-serif">© Lorem Ipsum</div>
+        <button type="button" onClick="{{ prev }}" aria-label="Previous photo" style="position:absolute;top:50%;left:14px;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid #e2e4e9;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.14)" style-hover="{{ arrowHover }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16181d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg>
+        </button>
+        <button type="button" onClick="{{ next }}" aria-label="Next photo" style="position:absolute;top:50%;right:14px;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid #e2e4e9;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.14)" style-hover="{{ arrowHover }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16181d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg>
+        </button>
+      </div>
+      <div role="tablist" aria-label="Choose photo" style="display:flex;gap:9px;justify-content:center;align-items:center;padding:10px 0 4px">
+        <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="4">
+          <button type="button" role="tab" aria-label="{{ dot.label }}" aria-selected="{{ dot.selected }}" onClick="{{ dot.onClick }}" style="{{ dot.style }}"></button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:8px 34px 30px">
+      <div style="font:600 12px/1 'Inter',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:{{ accent }}">{{ cur.country }}</div>
+      <h1 style="margin:8px 0 4px;font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:clamp(28px,3.4vw,40px);line-height:1.06;color:#16181d">{{ cur.stadium }}</h1>
+      <div style="font:500 15px/1.4 'Inter',sans-serif;color:#5b6472">{{ cur.city }}</div>
+
+      <dl style="display:flex;flex-wrap:wrap;gap:28px;margin:14px 0 2px;padding:12px 0;border-top:1px solid #ececf0;border-bottom:1px solid #ececf0">
+        <sc-for list="{{ stats }}" as="stat" hint-placeholder-count="4">
+          <div style="min-width:104px">
+            <dt style="font:600 12px/1 'Inter',sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#6b7280">{{ stat.label }}</dt>
+            <dd style="margin:7px 0 0;font:600 18px/1.05 'Inter',sans-serif;color:#363b44">{{ stat.value }}</dd>
+            <div style="font:400 12px/1.3 'Inter',sans-serif;color:#6b7280;margin-top:2px">{{ stat.note }}</div>
+          </div>
+        </sc-for>
+      </dl>
+
+      <p style="margin:14px 0 0;font:400 15px/1.62 'Inter',sans-serif;color:#2b2f38;text-wrap:pretty">{{ cur.desc }}</p>
+
+      <sc-if value="{{ showFact }}" hint-placeholder-val="{{ true }}">
+        <div style="margin:16px 0 0;display:flex;gap:14px;padding:13px 16px;background:#eef2fe;border-left:4px solid {{ accent }};border-radius:0 12px 12px 0">
+          <div style="flex:none;font:600 12px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }};padding-top:2px">Did you<br>know?</div>
+          <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif;color:#22303f;text-wrap:pretty">{{ cur.fact }}</p>
+        </div>
+      </sc-if>
+    </section>
+  </main>
+</div>
+<div style="min-width:104px">
+            <dt style="font:600 12px/1 'Inter',sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#6b7280">{{ stat.label }}</dt>
+            <dd style="margin:7px 0 0;font:600 18px/1.05 'Inter',sans-serif;color:#363b44">{{ stat.value }}</dd>
+            <div style="font:400 12px/1.3 'Inter',sans-serif;color:#6b7280;margin-top:2px">{{ stat.note }}</div>
+          </div></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1160,&quot;height&quot;:720},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1d4ed8&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#1d4ed8&quot;,&quot;#0e7490&quot;,&quot;#b91c1c&quot;,&quot;#7c3aed&quot;],&quot;section&quot;:&quot;Style&quot;},&quot;showFunFact&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { sel: 0, img: 0 };
+
+  get data() {
+    return [
+      { stadium: "MetLife Stadium", home: "Giants & Jets (NFL)", roof: "Open air", city: "East Rutherford, New Jersey", country: "United States", cc: "US", cap: "82,500", opened: "2010", matches: "8", mnote: "incl. the Final", tag: "Final Venue", feature: "Final-night bowl", desc: "Home to the NFL's Giants and Jets, MetLife will stage the 2026 final on July 19 — the tournament's showpiece, held in the largest bowl of any venue at the World Cup. Set in the Meadowlands just across the Hudson from Manhattan, it anchors the New York/New Jersey region's tournament run. During the tournament its rail links to Manhattan are set to move tens of thousands of fans on match days.", fact: "For the tournament a natural-grass pitch is laid over the artificial surface; the final is expected to draw a global audience in the hundreds of millions." },
+      { stadium: "SoFi Stadium", home: "Rams & Chargers (NFL)", roof: "Fixed translucent canopy", city: "Inglewood, California", country: "United States", cc: "US", cap: "70,240", opened: "2020", matches: "8", mnote: "group & knockout", tag: "Los Angeles", feature: "Translucent canopy", desc: "The most expensive stadium ever built (about $5B), SoFi sits under a vast translucent, sail-like roof that keeps it open-air while shielding fans from the sun. Part of the sprawling Hollywood Park development, it pairs that landmark roof with a mirrored, double-sided videoboard suspended over the field. Its climate-controlled comfort makes it a natural fit for marquee summer fixtures.", fact: "The seating bowl is sunk roughly 100 feet into the ground so the roofline stays below the flight paths of nearby LAX airport." },
+      { stadium: "AT&T Stadium", home: "Dallas Cowboys (NFL)", roof: "Retractable", city: "Arlington, Texas", country: "United States", cc: "US", cap: "80,000", opened: "2009", matches: "9", mnote: "most of any venue", tag: "Dallas", feature: "Retractable roof open", desc: "Home of the Dallas Cowboys and famous for its colossal center-hung video board, AT&T Stadium hosts nine matches — more than any other 2026 venue. Its record-setting board hangs from one 20-yard line to the other, keeping every seat close to the action. The vast covered interior also lets organizers stage fan events and ceremonies out of the weather.", fact: "The retractable roof opens in about 12 minutes, and the arch-supported design spans a quarter-mile with no interior columns." },
+      { stadium: "Mercedes-Benz Stadium", home: "Falcons & Atlanta United", roof: "Retractable", city: "Atlanta, Georgia", country: "United States", cc: "US", cap: "71,000", opened: "2017", matches: "8", mnote: "group & knockout", tag: "Atlanta", feature: "Pinwheel roof", desc: "Shared by the Atlanta Falcons and Atlanta United, the stadium is crowned by a striking eight-panel 'pinwheel' retractable roof that irises open like a camera shutter. Fans also know it for famously low-priced concessions, a rarity among major North American venues. Downtown Atlanta's transit and hotels sit within walking distance of the gates.", fact: "It was the first professional stadium to earn LEED Platinum certification, using far less water and energy than comparable venues." },
+      { stadium: "NRG Stadium", home: "Houston Texans (NFL)", roof: "Retractable", city: "Houston, Texas", country: "United States", cc: "US", cap: "72,220", opened: "2002", matches: "7", mnote: "group & knockout", tag: "Houston", feature: "Retractable roof", desc: "Houston's NRG Stadium was the NFL's first facility with a retractable roof and hosts a run of group and knockout matches. Fully air-conditioned and weatherproof, it offers a controlled environment through the fierce Texas summer heat. That flexibility lets the pitch be prepared to FIFA's exacting natural-grass standards.", fact: "The field can be split into massive trays and rolled outdoors — a feature used to grow natural grass in direct sunlight." },
+      { stadium: "Arrowhead Stadium", home: "Kansas City Chiefs (NFL)", roof: "Open air", city: "Kansas City, Missouri", country: "United States", cc: "US", cap: "76,416", opened: "1972", matches: "6", mnote: "group & knockout", tag: "Kansas City", feature: "The wall of sound", desc: "One of the NFL's most storied venues and home to the Chiefs, Arrowhead is renowned for a wall of sound from its passionate crowd. Its horseshoe bowl and legendary tailgating culture make it one of the sport's most intimidating away days. Expect that famous wall of noise to greet visiting sides throughout the group stage.", fact: "It holds the Guinness World Record for the loudest crowd roar at a stadium — 142.2 decibels, louder than a jet engine at take-off." },
+      { stadium: "Hard Rock Stadium", home: "Miami Dolphins (NFL)", roof: "Shade canopy", city: "Miami Gardens, Florida", country: "United States", cc: "US", cap: "65,326", opened: "1987", matches: "7", mnote: "incl. 3rd-place", tag: "Miami", feature: "Shade canopy", desc: "Home of the Miami Dolphins and the Miami Open, Hard Rock Stadium hosts the third-place play-off beneath its distinctive open canopy. Palm-lined and open to the Florida sky, it also stages Super Bowls, the Miami Grand Prix and college football's Orange Bowl. Its subtropical setting keeps play comfortable even in Florida's humid midsummer.", fact: "A $500M renovation added a translucent shade canopy that covers every seat while leaving the pitch open to the sky." },
+      { stadium: "Gillette Stadium", home: "Patriots & NE Revolution", roof: "Open air", city: "Foxborough, Massachusetts", country: "United States", cc: "US", cap: "65,878", opened: "2002", matches: "7", mnote: "group & knockout", tag: "Boston", feature: "Lighthouse landmark", desc: "Home to the New England Patriots and Revolution, Gillette Stadium anchors Boston's schedule south-west of the city. Roughly 30 miles from downtown, the venue sits at the heart of a year-round shopping and entertainment complex. Transport upgrades for the tournament ease the journey in from central Boston.", fact: "Its signature lighthouse and footbridge overlook Patriot Place, a retail and entertainment district built around the stadium." },
+      { stadium: "Lincoln Financial Field", home: "Philadelphia Eagles (NFL)", roof: "Open air", city: "Philadelphia, Pennsylvania", country: "United States", cc: "US", cap: "69,796", opened: "2003", matches: "6", mnote: "group & knockout", tag: "Philadelphia", feature: "Solar & wind array", desc: "The Eagles' home ground, 'the Linc' is one of the greenest stadiums in US sport and hosts a slate of group-stage fixtures. Deep in Philadelphia's storied stadium district, it is known for one of the loudest, most partisan crowds in the league. Its compact sports-complex setting puts fans just minutes from the city centre.", fact: "Thousands of solar panels and on-site wind turbines help the stadium generate a large share of its own electricity." },
+      { stadium: "Levi's Stadium", home: "San Francisco 49ers (NFL)", roof: "Open air", city: "Santa Clara, California", country: "United States", cc: "US", cap: "68,500", opened: "2014", matches: "6", mnote: "group & knockout", tag: "San Francisco Bay", feature: "Living green roof", desc: "The San Francisco 49ers' home in Silicon Valley pairs a tech-forward fan experience with strong sustainability credentials. Wired throughout with high-density connectivity, it was built as a showcase for the region's technology industry. Its Silicon Valley location places it at the heart of the Bay Area's match hub.", fact: "It was the first US pro football stadium to open with LEED Gold certification and features a 27,000-square-foot green roof." },
+      { stadium: "Lumen Field", home: "Seahawks & Sounders", roof: "Partial canopy", city: "Seattle, Washington", country: "United States", cc: "US", cap: "68,740", opened: "2002", matches: "6", mnote: "group & knockout", tag: "Seattle", feature: "Noise-trapping canopy", desc: "Shared by the Seahawks and Sounders, Lumen Field is famous for a partial roof canopy that traps and amplifies crowd noise. Its downtown setting and steep, close-set stands funnel that sound onto the pitch to create a genuine home advantage. Seattle's soccer-mad support should make it one of the tournament's fiercest atmospheres.", fact: "The angled roof reflects sound back onto the pitch, helping create some of the loudest atmospheres in North American sport." },
+      { stadium: "BMO Field", home: "Toronto FC (MLS)", roof: "Open air", city: "Toronto, Ontario", country: "Canada", cc: "CA", cap: "45,000", opened: "2007", matches: "6", mnote: "incl. Canada's opener", tag: "Toronto", feature: "Expanded stands", desc: "Home of Toronto FC, BMO Field is being expanded for the tournament and stages Canada's opening match along with other fixtures. Sitting on the shore of Lake Ontario at Exhibition Place, it becomes the first Canadian ground ever to host World Cup matches. A natural-grass pitch is being installed over the usual artificial surface for the finals.", fact: "Temporary stands lift capacity to around 45,000, and the natural-grass pitch is a long-standing fan favourite." },
+      { stadium: "BC Place", home: "Whitecaps & BC Lions", roof: "Retractable fabric", city: "Vancouver, British Columbia", country: "Canada", cc: "CA", cap: "54,500", opened: "1983", matches: "7", mnote: "group & knockout", tag: "Vancouver", feature: "Cable-supported roof", desc: "Vancouver's downtown stadium, home to the Whitecaps and BC Lions, sits under one of the world's largest cable-supported retractable roofs. Ringed by the North Shore mountains and False Creek, the roof can close within minutes when Pacific weather rolls in. Its downtown waterfront setting makes it one of the tournament's most scenic grounds.", fact: "The retractable fabric roof is held aloft by 36 masts and can open or close in about 20 minutes." },
+      { stadium: "Estadio Azteca", home: "Club América (Liga MX)", roof: "Open air", city: "Mexico City", country: "Mexico", cc: "MX", cap: "83,264", opened: "1966", matches: "5", mnote: "incl. the Opening Match", tag: "Opening Venue", feature: "Opening-match roar", desc: "A cathedral of world football, the Azteca hosts the 2026 opening match and becomes the first stadium ever to feature in three World Cups. Extensively renovated ahead of the tournament, the vast bowl remains one of the most atmospheric grounds in the world game. Playing at altitude adds a distinctive tactical challenge for visiting teams.", fact: "It staged the 1970 and 1986 finals — including Maradona's 'Hand of God' goal — and sits at roughly 2,200m altitude." },
+      { stadium: "Estadio Akron", home: "C.D. Guadalajara (Liga MX)", roof: "Open air (grass roof)", city: "Guadalajara, Jalisco", country: "Mexico", cc: "MX", cap: "48,071", opened: "2010", matches: "4", mnote: "group stage", tag: "Guadalajara", feature: "Crater roofline", desc: "Home of Chivas Guadalajara, Estadio Akron is set into the landscape like a volcanic crater with a grass-covered roof. Ringed by open countryside on the edge of Guadalajara, its earth-toned form seems to rise naturally from the land. The design has made it one of Mexican football's most photographed modern grounds.", fact: "From the air its undulating green roof blends into the surrounding terrain, resembling a cloud settled over a crater." },
+      { stadium: "Estadio BBVA", home: "C.F. Monterrey (Liga MX)", roof: "Open air", city: "Monterrey, Nuevo León", country: "Mexico", cc: "MX", cap: "53,500", opened: "2015", matches: "4", mnote: "group stage", tag: "Monterrey", feature: "Mountain-view opening", desc: "Nicknamed 'El Gigante de Acero' (the Steel Giant), Monterrey's home of Rayados frames a dramatic view of the Cerro de la Silla mountain. Opened in 2015 as one of the Americas' most modern grounds, its steel-clad tiers give sightlines found at few other stadiums. Its industrial northern-city setting gives the tournament a passionate regional base.", fact: "One open end of the stadium is aligned so fans look straight out at the saddle-shaped mountain beyond the pitch." }
+    ];
+  }
+
+  imagesFor(s) {
+    return ["Exterior on matchday", "Aerial view", s.feature, "Inside the bowl"];
+  }
+
+  select(i) { this.setState({ sel: i, img: 0 }); }
+
+  renderVals() {
+    const accent = this.props.accentColor ?? "#1d4ed8";
+    const showFact = this.props.showFunFact ?? true;
+    const data = this.data.slice().sort((a, b) => a.stadium.toLowerCase().localeCompare(b.stadium.toLowerCase()));
+    const sel = Math.min(this.state.sel, data.length - 1);
+    const cur = data[sel];
+    const role = /Venue/.test(cur.tag) ? cur.tag : "Host Venue";
+    const imgs = this.imagesFor(cur);
+    const img = ((this.state.img % imgs.length) + imgs.length) % imgs.length;
+
+    const selBtn = {
+      display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px",
+      width: "100%", textAlign: "left", cursor: "pointer",
+      padding: "10px 11px 11px", borderRadius: "10px", border: "1px solid transparent",
+      borderLeft: "3px solid " + accent, background: "#eef2fe", font: "inherit"
+    };
+    const baseBtn = {
+      display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px",
+      width: "100%", textAlign: "left", cursor: "pointer",
+      padding: "10px 11px 11px", borderRadius: "10px", border: "1px solid transparent",
+      borderLeft: "3px solid transparent", background: "transparent", font: "inherit"
+    };
+    const selName = { display: "block", font: "700 14px/1.25 'Inter',sans-serif", color: "#16181d" };
+    const baseName = { display: "block", font: "500 14px/1.25 'Inter',sans-serif", color: "#2b2f38" };
+
+    const items = data.map((s, i) => ({
+      idx: i, stadium: s.stadium, city: s.city, cc: s.cc,
+      current: i === sel ? "true" : undefined,
+      onClick: () => this.select(i),
+      btn: i === sel ? selBtn : baseBtn,
+      btnHover: i === sel ? selBtn : { ...baseBtn, background: "#f1f2f5" },
+      name: i === sel ? selName : baseName
+    }));
+
+    const dots = imgs.map((c, i) => ({
+      label: "Photo " + (i + 1) + ": " + c,
+      selected: i === img ? "true" : "false",
+      onClick: () => this.setState({ img: i }),
+      style: {
+        cursor: "pointer", padding: 0, border: "none",
+        width: i === img ? "26px" : "10px", height: "10px", borderRadius: "6px",
+        background: i === img ? accent : "#c9ccd3", transition: "width .2s, background .2s"
+      }
+    }));
+
+    const stats = [
+      { label: "Capacity", value: cur.cap, note: "seats" },
+      { label: "Opened", value: cur.opened, note: "year" },
+      { label: "2026 Matches", value: cur.matches, note: cur.mnote },
+      { label: "Home team", value: cur.home, note: "resident club(s)" }
+    ];
+
+    return {
+      accent, showFact, items, cur, role, stats, dots,
+      curImg: imgs[img],
+      counter: String(img + 1).padStart(2, "0") + " / " + String(imgs.length).padStart(2, "0"),
+      prev: () => this.setState(st => ({ img: (((st.img - 1) % imgs.length) + imgs.length) % imgs.length })),
+      next: () => this.setState(st => ({ img: (st.img + 1) % imgs.length })),
+      arrowHover: { background: "#ffffff", borderColor: accent, boxShadow: "0 3px 12px rgba(0,0,0,.2)" }
+    };
+  }
+}
+</script>
+</body>
+</html>
